@@ -1,6 +1,6 @@
 /*
 This file is part of Compare plugin for Notepad++
-Copyright (C)2011 Jean-Sébastien Leroy (jean.sebastien.leroy@gmail.com)
+Copyright (C)2011 Jean-SÃ©bastien Leroy (jean.sebastien.leroy@gmail.com)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -1315,9 +1315,16 @@ bool compareNew()
 
 	if (result != -1)
 	{
-		if(!different)
+		if (!different)
 		{
-			::MessageBox(nppData._nppHandle, TEXT("Files Match"), TEXT("Results :"), MB_OK);
+			if (::MessageBox(nppData._nppHandle, TEXT("Files match.\n\nClose compared files?"), TEXT("Compare Plugin"), MB_YESNO | MB_ICONQUESTION) == IDYES)		// Yaron - An option to close compared files.
+			{
+				SendMessage(nppData._nppHandle, WM_COMMAND, IDM_FILE_CLOSE, 0);
+				SendMessage(nppData._nppHandle, WM_COMMAND, IDM_VIEW_SWITCHTO_OTHER_VIEW, 0);
+				SendMessage(nppData._nppHandle, WM_COMMAND, IDM_FILE_CLOSE, 0);
+				SendMessage(nppData._nppHandle, WM_COMMAND, IDM_VIEW_SWITCHTO_OTHER_VIEW, 0);
+			}
+
 			return true;
 		}
 
