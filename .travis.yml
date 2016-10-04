@@ -5,6 +5,9 @@ compiler:
 
 env:
   - BUILDMODE=cmake-mingw64
+  addons:         
+     apt:           
+       packages:             - gcc-mingw-w64-base             - binutils-mingw-w64-i686             - gcc-mingw-w64-i686             - gcc-mingw-w64      
 
 before_script:
   - sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
@@ -15,7 +18,7 @@ before_script:
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 20
   - sudo update-alternatives --config gcc
   - sudo update-alternatives --config g++
-  - if [ "$BUILDMODE" = "cmake-mingw64" ]; then sudo apt-get -qq install mingw-w64; fi
+  - if [ "$BUILDMODE" = "cmake-mingw64" ]; then sudo apt-get -qq install gcc-mingw-w64-i686 g++-mingw-w64-i686 binutils-mingw-w64-i686 mingw-w64-dev; fi
 
 script:
   - if [ "$BUILDMODE" = "cmake-mingw64" ]; then echo "===> Building with cmake+mingw64..." &&
