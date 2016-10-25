@@ -16,7 +16,7 @@ matrix:
             - g++-mingw-w64-x86-64
             - gcc-mingw-w64-x86-64
             - g++-mingw-w64
-            - mingw-w64-dev
+            - mingw-w64-x86-64-dev
     - os: linux
       compiler: gcc
       env: BUILDMODE=cmake-mingw64_i686
@@ -27,7 +27,7 @@ matrix:
             - binutils-mingw-w64-i686
             - g++-mingw-w64-i686
             - gcc-mingw-w64-i686
-            - mingw-w64-dev
+            - mingw-w64-i686-dev
 
 script:
   - if [ "$BUILDMODE" = "cmake-mingw64_i686" ]; then echo "===> Building with cmake+mingw64_i686..." &&
